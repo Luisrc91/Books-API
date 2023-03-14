@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose
 
 const bookSchema = new Schema({
-    title: String,
+    title: {type: String, required: true},
     description: String,
     year: Number,
     quantity: Number,
@@ -11,4 +11,4 @@ const bookSchema = new Schema({
 
 const Book = mongoose.model('Book', bookSchema)
 
-module.export = Book;
+module.exports = Book;

@@ -6,23 +6,28 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const PORT = process.env.PORT
 const app = express()
-mongoose.connect(process.env.MONGO_URI,
-     {
-        useNewUrlParser: true, 
-        useUnifiedTopology: true
-    }, 
-    () => {'connected to mongo: ', process.env.MONGO_URI}
-)
+// mongoose.connect(process.env.MONGO_URI,
+//      {
+//         useNewUrlParser: true, 
+//         useUnifiedTopology: true
+//     }, 
+//     () => {'connected to mongo: ', process.env.MONGO_URI}
+// )
 
 // MIDDLEWARE
-app.use(express.urlencoded({extended: true}))
+app.use(express.urlencoded({ extended: true }));
+
 
 // controller
-const bookController = require("./controllers/book_controller")
-app.use('/books')
+const bookController = require("./controllers/books_controller")
+app.use('/books', bookController);
 
-
+// ROUTES
+app.get('/', (req, res) => {
+    res.send('Welcome to the Books API!')
+  })
+  
 // Listen
 app.listen(PORT, () => {
-    console.log( 'Im Alive')
+    console.log( 'Im Alive', PORT)
 })
